@@ -120,7 +120,7 @@ public class ConstructorArchivo
 	
 	public void crearProdutos()
 	{
-		this.lecProd.getProductos(this.lotes, this.referencias ,this.categorias, this.congelados,this.frescos,this.refrigerados);
+		//this.lecProd.getProductos(this.lotes, this.referencias ,this.categorias, this.congelados,this.frescos,this.refrigerados);
 	}
 	
 	
