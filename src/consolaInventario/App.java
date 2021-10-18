@@ -2,7 +2,7 @@ package consolaInventario;
 import java.io.*;
 import java.util.*;
 
-import appInventario.SistemaInventario;
+import appInventario.*;
 import procesamientoInventario.LectorArchivo;
 
 public class App {
@@ -74,6 +74,12 @@ public class App {
 	
 	private void cargarCSV()
 	{
+		String codigo = "12345";
+		String fecha = "2007-10-03";
+		Producto producto = new Producto(codigo,fecha);
+		ProductoCongelado congelado = (ProductoCongelado) producto;
+		boolean respuesta = congelado.equals(producto);
+		System.out.printf("%b\n\n", respuesta);
 		this.sistemaInventario.leerCSV();
 	}
 	

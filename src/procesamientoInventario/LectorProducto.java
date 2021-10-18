@@ -69,26 +69,33 @@ public class LectorProducto {
 			product.modificarRestantes(unidades);
 
 			
+			//Asignar Costo
+			product.setCostoUnidad(costo);
+
+			
+			
+			
+			//Añadir información particular al tipo
 			if (categoria.equals("CONGELADO"))
 			{
-				product = (ProductoCongelado) product;
-
-				
+				ProductoCongelado congelado = (ProductoCongelado) product;
+				double tempCongelacion = Double.parseDouble(linea.get(14));
 			}
 			else if (categoria.equals("FRESCO"))
 			{
-				
+				continue;
 			}
 			else if (categoria.equals("REFRIGERADO"))
 			{
-				
+				ProductoRefrigerado refrigerado = (ProductoRefrigerado) product; 
+				refrigerado.setTempRefrigerado(Double.parseDouble(linea.get(13)));
 			}
 			else
 			{
-				
+				Gondola gondObj = categorias.get(categoria).getGondolas().get(gondola);
+				ProductoGondola productoGondola = (ProductoGondola) product; 
+				productoGondola.setGondola(gondObj);
 			}
-			
-			
 		}
 
 	}

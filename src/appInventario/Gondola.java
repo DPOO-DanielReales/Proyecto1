@@ -5,7 +5,7 @@ import java.util.*;
 public class Gondola {
 
 	private ArrayList<ProductoGondola> productos;
-	
+	private Categoria categoria;
 	private String nombre;
 	
 	public Gondola(String nombre)
@@ -20,6 +20,11 @@ public class Gondola {
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public void setCategoria(Categoria categoria)
+	{
+		this.categoria = categoria;
 	}
 
 	

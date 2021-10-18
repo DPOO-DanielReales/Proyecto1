@@ -85,10 +85,11 @@ public class ConstructorArchivo
 			String categoria = relacion[0];
 			if (this.categorias.containsKey(categoria))
 			{
-				Categoria cat = this.categorias.get(categoria);
-				Gondola gondola = new Gondola(relacion[1]);
-				cat.agregarGondola(gondola);
 
+				Gondola gondola = new Gondola(relacion[1]);
+				Categoria cat = this.categorias.get(categoria);
+				cat.agregarGondola(gondola);
+				gondola.setCategoria(cat);
 			}
 			else
 			{

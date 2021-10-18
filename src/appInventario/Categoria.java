@@ -24,4 +24,9 @@ public class Categoria {
 		}
 
 	}
+
+	public HashMap<String, Gondola> getGondolas() {
+		return gondolas;
+	}
+
 }

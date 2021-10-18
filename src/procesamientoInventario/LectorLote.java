@@ -3,9 +3,7 @@ package procesamientoInventario;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import appInventario.Lote;
-import appInventario.Producto;
-import appInventario.Referencia;
+import appInventario.*;
 
 public class LectorLote {
 
@@ -29,6 +27,7 @@ public class LectorLote {
 		{
 			
 			//Obtener información
+			String categoria = linea.get(4);
 			String SKU = linea.get(2);
 			int idLote = Integer.parseInt(linea.get(0));
 			String vencimiento = linea.get(1);
@@ -37,8 +36,29 @@ public class LectorLote {
 			double unidades = Double.parseDouble(linea.get(8));
 			
 
-			//Crear el nuevo producto y el nuevo lote
-			Producto prod = new Producto(SKU, vencimiento);
+			//Crear el nuevo producto dependiendo de la categoria
+			Producto prod = null;
+			if(categoria.equals("CONGELADO"))
+			{
+				ProductoCongelado congelado = new ProductoCongelado(SKU,vencimiento);
+				prod = (Producto) congelado;
+			}
+			else if(categoria.equals("FRESCO"))
+			{
+				ProductoFresco fresco = new ProductoFresco(SKU,vencimiento);
+				prod = (Producto) fresco;
+			}
+			else if(categoria.equals("REFRIGERADO"))
+			{
+				ProductoRefrigerado refrigerado = new ProductoRefrigerado(SKU,vencimiento);
+				prod = (Producto) refrigerado;
+			}
+			else
+			{
+				ProductoGondola prodGondola = new ProductoGondola(SKU,vencimiento);
+				prod = (Producto) prodGondola;
+			}
+
 			Lote lote = new Lote(idLote, vencimiento, prod, precioVenta, costoProveedor, unidades);
 			
 			this.lotes.add(lote);
