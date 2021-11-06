@@ -1,16 +1,19 @@
 package appInventario;
 
+import java.time.LocalDate;
+
 public class Lote {
 
-	private int id;
-	private String vencimiento;
+	private String id;
+	private LocalDate vencimiento;
 	private Producto producto;
 	private double precioVenta;
 	private double costoProveedor;
 	private double unidades;
 	
-	public Lote(int id, String venc, Producto prod, double preVen, double cost, double uni)
+	public Lote(String id, LocalDate venc, Producto prod, double preVen, double cost, double uni)
 	{
+
 		this.id = id;
 		this.vencimiento = venc;
 		this.producto = prod;
@@ -20,11 +23,11 @@ public class Lote {
 
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

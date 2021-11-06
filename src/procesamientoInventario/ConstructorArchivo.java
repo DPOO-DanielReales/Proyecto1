@@ -12,6 +12,7 @@ import appInventario.ProductoCongelado;
 import appInventario.ProductoFresco;
 import appInventario.ProductoRefrigerado;
 import appInventario.Referencia;
+import appInventario.SistemaInventario;
 
 public class ConstructorArchivo 
 {
@@ -21,23 +22,17 @@ public class ConstructorArchivo
 	private LectorLote lecLot;
 	private LectorProducto lecProd;
 
-	private HashMap<String, Categoria> categorias;
-	private HashMap<String, Lote> lotes;
-	private HashMap<String, Referencia> referencias;
-	private HashMap<String, Referencia> congelados;
-	private HashMap<String, Referencia> frescos;
-	private HashMap<String, Referencia> refrigerados; 
+	private SistemaInventario principal;
 
-	public ConstructorArchivo()
+	public ConstructorArchivo(SistemaInventario principal)
 	{
+		this.principal = principal;
+		
 		this.lecCat = new LectorCategorias();
 		this.lecGond = new LectorGondola();
 		this.lecLot = new LectorLote();
 		this.lecProd = new LectorProducto();
-		
-		this.categorias = new HashMap<String,Categoria>();
-		this.lotes = new HashMap<String,Lote>();
-		this.referencias= new HashMap<String,Referencia>();
+
 	}
 
 	
@@ -63,13 +58,15 @@ public class ConstructorArchivo
 	public void crearCategorias()
 	{
 		ArrayList<String> csvCats= lecCat.getCategorias();
-		
+		HashMap<String, Categoria> categorias = principal.getCategorias();
 		for(String nombre: csvCats)
 		{
-			Categoria cat = new Categoria(nombre);
-			if(!this.categorias.containsKey(nombre))
+			
+			//Si no está en las categorias, crear y agregar
+			if(!categorias.containsKey(nombre))
 			{
-				this.categorias.put(nombre, cat);
+				Categoria cat = new Categoria(nombre);
+				categorias.put(nombre, cat);
 			}
 
 		}
@@ -78,18 +75,30 @@ public class ConstructorArchivo
 	
 	public void crearGondolas()
 	{
+
 		ArrayList<String[]> gondolas = lecGond.getGondolas(); 
+		HashMap<String, Categoria> categorias = principal.getCategorias();
+
 		
 		for(String[] relacion: gondolas)
 		{
 			String categoria = relacion[0];
-			if (this.categorias.containsKey(categoria))
-			{
+			String gond = relacion[1];
 
-				Gondola gondola = new Gondola(relacion[1]);
-				Categoria cat = this.categorias.get(categoria);
-				cat.agregarGondola(gondola);
-				gondola.setCategoria(cat);
+			//Verificar que la categoria ya existe
+			if (categorias.containsKey(categoria))
+			{
+				//Buscar y agregar o crear gondola
+				Gondola gondola;
+				Categoria cat = categorias.get(categoria);
+				HashMap<String,Gondola> gondolasMap = cat.getGondolas();
+				if (!gondolasMap.containsKey(gond))
+				{
+					gondola = new Gondola(gond);
+					gondolasMap.put(gond, gondola);
+					gondola.setCategoria(cat);
+				}
+
 			}
 			else
 			{
@@ -101,15 +110,18 @@ public class ConstructorArchivo
 	
 	public void crearLotes()
 	{
-		ArrayList<Lote> lotes = this.lecLot.getLotes(this.referencias);
+		HashMap<String, Referencia> referencias = principal.getReferencias(); 
+		HashMap<String, Lote> lotes = principal.getLotes();
+		//Leer la información de los lotes de la data del CSV
+		ArrayList<Lote> lotesArr = this.lecLot.getLotes(referencias);
 		
-		for (Lote lote: lotes)
+		for (Lote lote: lotesArr)
 		{
-			String id = Integer.toString(lote.getId());
+			String id = lote.getId();
 			//Verificar que no se encuentre en el mapa
-			if (!this.lotes.containsKey(id))
+			if (lotes.containsKey(id))
 			{
-				this.lotes.put(id, lote);
+				lotes.put(id, lote);
 			}
 			else
 			{
@@ -119,9 +131,9 @@ public class ConstructorArchivo
 	}
 	
 	
-	public void crearProdutos()
+	public void crearReferencias()
 	{
-		//this.lecProd.getProductos(this.lotes, this.referencias ,this.categorias, this.congelados,this.frescos,this.refrigerados);
+		this.lecProd.getProductos(principal.getReferencias(), principal.getCategorias());
 	}
 	
 	

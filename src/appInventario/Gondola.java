@@ -4,18 +4,14 @@ import java.util.*;
 
 public class Gondola {
 
-	private ArrayList<ProductoGondola> productos;
+	private HashMap<String, Referencia> referencias;
 	private Categoria categoria;
 	private String nombre;
 	
 	public Gondola(String nombre)
 	{
-		this.productos = new ArrayList<ProductoGondola>();
+		this.referencias = new HashMap<String,Referencia>();
 		this.nombre = nombre;
-	}
-
-	public ArrayList<ProductoGondola> getProductos() {
-		return productos;
 	}
 
 	public String getNombre() {
@@ -27,6 +23,8 @@ public class Gondola {
 		this.categoria = categoria;
 	}
 
-	
-	
+	public HashMap<String,Referencia> getReferencias()
+	{
+		return this.referencias;
+	}
 }

@@ -16,24 +16,32 @@ public class LectorGondola {
 	
 	public ArrayList<String[]> getGondolas()
 	{
+		//Retorna un ArrayList de String[] donde cada
+		// String[] es una relación con el formato:
+		// gondola String[1]
+		// categoria String[0]
+
 		ArrayList<String[]> gondolas = new ArrayList<>();
 
+		//Recuperar información CSV
 		ArrayList<ArrayList<String>> data = lector.getDatos();
-		
+	
+		//Iterar filas CSV
 		for(ArrayList<String> fila :data)
 		{
-			String celda = fila.get(5);
-		
+			// Recuperar nombre de la gondola
+			String celda = fila.get(5).strip().toUpperCase();
+	
 			if (celda.equals(""))
 			{
-				continue;
+				//Crear gondola única para Refrigerados, Congelados y Frescos
+				celda = fila.get(4).strip().toUpperCase();
 			}
-			else
-			{
-				String categoria = fila.get(4);
-				String[] relacion = {categoria,celda};
-				gondolas.add(relacion);
-			}
+			//Nombre categoria
+			String categoria = fila.get(4).strip().toUpperCase();
+			//Asociar gondola a categoria;
+			String[] relacion = {categoria,celda};
+			gondolas.add(relacion);
 			
 		}
 		

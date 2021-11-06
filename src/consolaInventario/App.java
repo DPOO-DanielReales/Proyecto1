@@ -75,6 +75,7 @@ public class App {
 	private void cargarCSV()
 	{
 		this.sistemaInventario.leerCSV();
+		System.out.println("Información Cargada Exitosamente");
 	}
 	
 	

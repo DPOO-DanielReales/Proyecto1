@@ -28,18 +28,8 @@ public class LectorCategorias {
 		for (ArrayList<String> linea: datos)
 		{
 			celda = linea.get(4).strip().toUpperCase();
+			categorias.add(celda);
 
-			if(celda.equals("CONGELADO") || celda.equals("REFRIGERADO") || celda.equals("FRESCO"))
-			{
-				continue;
-			}
-			else
-			{
-				categorias.add(celda);
-			}
-			
-
-			
 		}
 		
 		return categorias;

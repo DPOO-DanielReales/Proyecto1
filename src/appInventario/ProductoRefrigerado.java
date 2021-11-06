@@ -4,8 +4,8 @@ public class ProductoRefrigerado extends Producto {
 
 	private double tempRefrigerado;
 
-	public ProductoRefrigerado(String codigo, String vencimiento) {
-		super(codigo, vencimiento);
+	public ProductoRefrigerado(String codigo, String vencimiento, String[] charac, Referencia referencia) {
+		super(codigo, vencimiento, charac, referencia);
 	}
 
 	public double getTempRefrigerado() {

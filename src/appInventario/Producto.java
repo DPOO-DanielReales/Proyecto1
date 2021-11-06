@@ -3,30 +3,41 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Producto {
-	
-	final String codigoProducto;
-	final LocalDate fechaVenc; 
-	String nombre;
-	String marca;
-	float pesoNeto;
-	String unidadMedida;
-	double costoUnidad;
-	double precioUnidad;
-	Date fechaIngreso;
-	int unidadesRestantes;
-	boolean empacado;
+
+	private Referencia referencia;
+	private final String SKU;
+	private final LocalDate fechaVenc; 
+	private String nombre;
+	private String marca;
+	private String pesoNeto;
+	private String unidadMedida;
+	private double costoUnidad;
+	private double precioUnidad;
+	private LocalDate fechaIngreso;
+	private int unidadesRestantes;
+	private boolean empacado;
+	private boolean disponibleVenta;
 
 	public LocalDate getFechaVenc() {
 		return fechaVenc;
 	}
 
-	boolean disponibleVenta;
 
-	public Producto(String codigo, String fechaVenc)
+	public Producto(String codigo, String fechaVenc,String[] charac,Referencia referencia)
 	{
-		this.codigoProducto = codigo; 
+		this.SKU= codigo; 
 		LocalDate fecha = LocalDate.parse(fechaVenc);
 		this.fechaVenc = fecha;
+		this.nombre = charac[0];
+		this.marca = charac[1];
+		this.empacado = charac[2].equals("Y"); 
+		this.unidadesRestantes = Integer.parseInt(charac[3]);
+		this.costoUnidad = Double.parseDouble(charac[4]);
+		this.precioUnidad = Double.parseDouble(charac[5]);
+		this.fechaIngreso = LocalDate.now();
+		this.pesoNeto = charac[6];
+		this.unidadMedida = charac[7];
+		
 	}
 
 	public String getNombre() {
@@ -45,11 +56,11 @@ public class Producto {
 		this.marca = marca;
 	}
 
-	public float getPesoNeto() {
+	public String getPesoNeto() {
 		return pesoNeto;
 	}
 
-	public void setPesoNeto(float pesoNeto) {
+	public void setPesoNeto(String pesoNeto) {
 		this.pesoNeto = pesoNeto;
 	}
 
@@ -60,11 +71,11 @@ public class Producto {
 	public void setUnidadMedida(String unidadMedida) {
 		this.unidadMedida = unidadMedida;
 	}
-	public Date getFechaIngreso() {
+	public LocalDate getFechaIngreso() {
 		return fechaIngreso;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(LocalDate fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
 
@@ -109,7 +120,7 @@ public class Producto {
 	}
 
 	public String getCodigoProducto() {
-		return codigoProducto;
+		return this.SKU;
 	}
 	
 	public void modificarRestantes(int unidades)

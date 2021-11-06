@@ -1,5 +1,6 @@
 package procesamientoInventario;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,10 +11,6 @@ public class LectorLote {
 	private LectorArchivo lector;
 	
 	private ArrayList<Lote> lotes;
-
-	public LectorArchivo getLector() {
-		return lector;
-	}
 
 	public void setLector(LectorArchivo lector) {
 		this.lector = lector;
@@ -27,59 +24,25 @@ public class LectorLote {
 		{
 			
 			//Obtener información
-			String categoria = linea.get(4);
 			String SKU = linea.get(2);
-			int idLote = Integer.parseInt(linea.get(0));
+			String idLote = linea.get(0);
 			String vencimiento = linea.get(1);
+			LocalDate venc = LocalDate.parse(vencimiento);
 			double precioVenta = Double.parseDouble(linea.get(10));
 			double costoProveedor = Double.parseDouble(linea.get(9));	
 			double unidades = Double.parseDouble(linea.get(8));
+		
+			//Recuperar el producto
+			Producto producto = referencias.get(SKU).getProductos().get(venc);
 			
-
-			//Crear el nuevo producto dependiendo de la categoria
-			Producto prod = null;
-			if(categoria.equals("CONGELADO"))
-			{
-				ProductoCongelado congelado = new ProductoCongelado(SKU,vencimiento);
-				prod = (Producto) congelado;
-			}
-			else if(categoria.equals("FRESCO"))
-			{
-				ProductoFresco fresco = new ProductoFresco(SKU,vencimiento);
-				prod = (Producto) fresco;
-			}
-			else if(categoria.equals("REFRIGERADO"))
-			{
-				ProductoRefrigerado refrigerado = new ProductoRefrigerado(SKU,vencimiento);
-				prod = (Producto) refrigerado;
-			}
-			else
-			{
-				ProductoGondola prodGondola = new ProductoGondola(SKU,vencimiento);
-				prod = (Producto) prodGondola;
-			}
-
-			Lote lote = new Lote(idLote, vencimiento, prod, precioVenta, costoProveedor, unidades);
+			//Crear el lote
+			Lote lote = new Lote(idLote, venc, producto, precioVenta,costoProveedor,unidades);
+			//Actualizar la información de la referencia (precio) 
+			Referencia ref = referencias.get(SKU);
 			
+			ref.setPrecioVenta(precioVenta);
+			//Agregar el lote al array
 			this.lotes.add(lote);
-	
-			Referencia ref;
-			if(!referencias.containsKey(SKU))
-			{
-				
-				ref = new Referencia(SKU);
-				referencias.put(SKU, ref);
-			}
-			else
-			{
-				ref = referencias.get(SKU);
-			}
-			
-			//Agregar el producto 
-			
-			ref.getProductos().put(prod.getFechaVenc(), prod);
-			
-			
 		}
 		
 		return this.lotes;
