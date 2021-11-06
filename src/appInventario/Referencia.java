@@ -10,13 +10,14 @@ public class Referencia {
 
 	private double precioVenta;
 
-	private SortedMap<LocalDate, Producto> productos;
+	private TreeMap<LocalDate, Producto> productos;
 
 	private String SKU;
 
 	public Referencia(String SKU)
 	{
 		this.SKU = SKU;
+		this.productos = new TreeMap<LocalDate, Producto>();
 	}
 	
 	public SortedMap<LocalDate, Producto> getProductos()

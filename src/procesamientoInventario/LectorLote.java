@@ -14,6 +14,7 @@ public class LectorLote {
 
 	public void setLector(LectorArchivo lector) {
 		this.lector = lector;
+		this.lotes = new ArrayList<>();
 	}
 	
 	public ArrayList<Lote> getLotes(HashMap<String,Referencia> referencias)
