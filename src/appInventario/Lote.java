@@ -1,9 +1,14 @@
 package appInventario;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Lote {
+public class Lote implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5061802896147678521L;
 	private String id;
 	private LocalDate vencimiento;
 	private Producto producto;

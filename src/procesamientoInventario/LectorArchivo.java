@@ -3,8 +3,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class LectorArchivo {
+public class LectorArchivo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8934289369761744497L;
 	ArrayList<ArrayList<String>> datos;
 
 	

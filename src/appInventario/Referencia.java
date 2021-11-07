@@ -1,10 +1,16 @@
 package appInventario;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
 
-public class Referencia {
+public class Referencia implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5840029347459473414L;
 
 	private int unidadesRestantes;
 

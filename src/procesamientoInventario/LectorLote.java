@@ -1,12 +1,18 @@
 package procesamientoInventario;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import appInventario.*;
 
-public class LectorLote {
+public class LectorLote implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4283124359898487578L;
 
 	private LectorArchivo lector;
 	

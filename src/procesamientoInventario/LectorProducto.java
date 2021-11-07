@@ -1,11 +1,17 @@
 package procesamientoInventario;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import appInventario.*;
 
-public class LectorProducto {
+public class LectorProducto implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7431732051467359728L;
+
 	private LectorArchivo lector;
 	
 	private static final String REFRIGERADO = "REFRIGERADO";

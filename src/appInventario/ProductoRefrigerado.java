@@ -1,7 +1,13 @@
 package appInventario;
 
-public class ProductoRefrigerado extends Producto {
+import java.io.Serializable;
 
+public class ProductoRefrigerado extends Producto implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7053841866909463357L;
 	private double tempRefrigerado;
 
 	public ProductoRefrigerado(String codigo, String vencimiento, String[] charac, Referencia referencia) {

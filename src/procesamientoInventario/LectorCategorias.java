@@ -1,10 +1,15 @@
 package procesamientoInventario;
 
+import java.io.Serializable;
 import java.util.*;
 import appInventario.Categoria;
 
-public class LectorCategorias {
+public class LectorCategorias implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8453971042751651085L;
 	private LectorArchivo lector;
 
 	public LectorArchivo getLector() {

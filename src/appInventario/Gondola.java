@@ -1,9 +1,14 @@
 package appInventario;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Gondola {
+public class Gondola implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4340926957313791660L;
 	private HashMap<String, Referencia> referencias;
 	private Categoria categoria;
 	private String nombre;

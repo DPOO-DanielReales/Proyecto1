@@ -1,9 +1,14 @@
 package procesamientoInventario;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LectorGondola {
+public class LectorGondola implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4185701996042555443L;
 	private LectorArchivo lector;
 
 	public LectorArchivo getLector() {

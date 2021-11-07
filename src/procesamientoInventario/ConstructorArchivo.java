@@ -1,6 +1,7 @@
 package procesamientoInventario;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,9 +15,13 @@ import appInventario.ProductoRefrigerado;
 import appInventario.Referencia;
 import appInventario.SistemaInventario;
 
-public class ConstructorArchivo 
+public class ConstructorArchivo implements Serializable 
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7776037060304417834L;
 	private LectorCategorias lecCat;
 	private LectorGondola lecGond;
 	private LectorLote lecLot;
@@ -119,7 +124,7 @@ public class ConstructorArchivo
 		{
 			String id = lote.getId();
 			//Verificar que no se encuentre en el mapa
-			if (lotes.containsKey(id))
+			if (!lotes.containsKey(id))
 			{
 				lotes.put(id, lote);
 			}

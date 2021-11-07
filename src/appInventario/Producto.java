@@ -1,9 +1,14 @@
 package appInventario;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Producto {
+public class Producto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2233162813984939567L;
 	private Referencia referencia;
 	private final String SKU;
 	private final LocalDate fechaVenc; 
@@ -39,6 +44,7 @@ public class Producto {
 		this.unidadMedida = charac[7];
 		
 	}
+	
 
 	public String getNombre() {
 		return nombre;
