@@ -44,6 +44,9 @@ public class LectorLote implements Serializable {
 			
 			//Crear el lote
 			Lote lote = new Lote(idLote, venc, producto, precioVenta,costoProveedor,unidades);
+			//Asociar el Lote al Producto
+			producto.setLote(lote);
+
 			//Actualizar la información de la referencia (precio) 
 			Referencia ref = referencias.get(SKU);
 			

@@ -22,6 +22,7 @@ public class Producto implements Serializable {
 	private int unidadesRestantes;
 	private boolean empacado;
 	private boolean disponibleVenta;
+	private Lote lote;
 
 	public LocalDate getFechaVenc() {
 		return fechaVenc;
@@ -133,6 +134,11 @@ public class Producto implements Serializable {
 	{
 		//Incrementa o decrementa el número de unidades restantes
 		this.unidadesRestantes += unidades;
+	}
+
+
+	public void setLote(Lote lote) {
+		this.lote = lote;
 	}
 
 }
